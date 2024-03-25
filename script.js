@@ -3,6 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 var i = 0;
 var score = 0;
 var questions; // Declaring questions globally
+var selectedOption;
 
 const loadUI = () => {
   let con = document.getElementById("container");
@@ -26,11 +27,11 @@ const showRes = () => {
 };
 
 const checkAns = (e) => {
-  if (e.target.innerText == questions[i].answer) {
+  selectedOption = e.target;
+  if (selectedOption.innerText == questions[i].answer) {
     score += 1;
+    selectedOption.classList.add("correct");
   }
-  i++;
-  loadQue(questions);
 };
 
 const loadQue = () => {
@@ -44,6 +45,12 @@ const loadQue = () => {
   } else if (i == questions.length) {
     showRes();
   }
+};
+
+const loadNextQue = () => {
+  i++;
+  loadQue(questions);
+  selectedOption.classList.toggle("correct");
 };
 
 const getQuestions = async (topic) => {
@@ -84,6 +91,7 @@ const getQuestions = async (topic) => {
 };
 
 document.getElementById("enter").addEventListener("click", submitTopic);
+document.querySelector(".next").addEventListener("click", loadNextQue);
 Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
   elem.addEventListener("click", checkAns)
 );

@@ -89,3 +89,8 @@ body {
   background-color: burlywood;
   border-radius: 100px;
 }
+
+.correct {
+  border: 2px solid green;
+  background-color: #27bd4d;
+}
