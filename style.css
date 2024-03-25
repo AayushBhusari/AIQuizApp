@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo&family=Montserrat:wght@500&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Heebo", sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #1d1d20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  width: 100dvw;
+}
+
+.modal {
+  /* display: none; */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.modal input[type="text"] {
+  margin: 15px 0;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #0056b3;
+}
+
+.container {
+  border-radius: 20px;
+  padding: 2rem;
+  background-color: aqua;
+  border: 2px solid black;
+  width: 65%;
+  height: 60%;
+}
+.hidden {
+  display: none;
+}
+
+.question {
+  text-align: center;
+  margin-top: 5px;
+  height: 50%;
+  background-color: bisque;
+}
+
+.options {
+  height: 50%;
+  background-color: wheat;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 2rem;
+}
+.option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.options .option button {
+  width: 70%;
+  height: 50%;
+  background-color: burlywood;
+  border-radius: 100px;
+}
