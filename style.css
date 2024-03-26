@@ -52,18 +52,25 @@ body {
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
   border-radius: 20px;
-  padding: 2rem;
+  padding: 1.5rem;
   background-color: aqua;
   border: 2px solid black;
   width: 65%;
   height: 60%;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .hidden {
   display: none;
 }
 
 .question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   margin-top: 5px;
   height: 50%;
@@ -93,4 +100,12 @@ body {
 .correct {
   border: 2px solid green;
   background-color: #27bd4d;
+}
+
+.next {
+  align-self: center;
+  justify-self: center;
+  padding: 5px;
+  margin-top: 15px;
+  width: 100px;
 }

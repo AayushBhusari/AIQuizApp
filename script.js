@@ -37,9 +37,11 @@ const checkAns = (e) => {
   else {
     var ansInd;
     let ans = questions[i].answer;
+    console.log(`ans from ans ${ans}`);
     console.log(questions[i].options);
     for (let optNo = 0; optNo < questions[i].options.length; optNo++) {
       if (questions[i].options[optNo] == ans) {
+        console.log("Answer from search" + questions[i].options[optNo]);
         ansInd = optNo;
         if (ansInd == 0) {
           document.getElementById("opt1").classList.add("correct");
@@ -53,7 +55,7 @@ const checkAns = (e) => {
       }
     }
 
-    console.log(ansInd);
+    console.log(`ansInd : ${ansInd}`);
   }
 };
 
