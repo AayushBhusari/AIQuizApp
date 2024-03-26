@@ -28,9 +28,30 @@ const showRes = () => {
 
 const checkAns = (e) => {
   selectedOption = e.target;
+  //when correct option is selected
   if (selectedOption.innerText == questions[i].answer) {
     score += 1;
     selectedOption.classList.add("correct");
+  }
+  //incorrect option selected
+  else {
+    var ansInd;
+    let ans = questions[i].answer;
+    console.log(questions[i].options);
+    for (let i = 0; i < questions[i].options.length; i++) {
+      if (questions[i].options[i] == ans) {
+        ansInd = i;
+        if (ansInd == 0) {
+          document.getElementById("opt1").classList.add("correct");
+        } else if (ansInd == 1) {
+          document.getElementById("opt2").classList.add("correct");
+        } else if (ansInd == 2) {
+          document.getElementById("opt3").classList.add("correct");
+        } else if (ansInd == 3) {
+          document.getElementById("opt4").classList.add("correct");
+        }
+      }
+    }
   }
 };
 
@@ -50,7 +71,10 @@ const loadQue = () => {
 const loadNextQue = () => {
   i++;
   loadQue(questions);
-  selectedOption.classList.toggle("correct");
+  Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
+    elem.classList.remove("correct")
+  );
+  /* selectedOption.classList.remove("correct"); */
 };
 
 const getQuestions = async (topic) => {
@@ -74,14 +98,14 @@ const getQuestions = async (topic) => {
         "answer": "answer here"
       },
       // Add more data here
-    ].Make sure there are no syntax errors in the response, no missing colons, semicolons, brackets, square-brackets or anything.When mentioning title of anything in the question, use single quotation mark (') instead of double ones("). Options of the questions should be inside an array named options`;
+    ].Make sure there are no syntax errors in the response, no missing colons, semicolons, brackets, square-brackets or anything.When mentioning title of anything in the question, use single quotation mark (') instead of double ones("). Options of the questions should be inside an array named options.In case of current affairs, make sure all the questions are up to date with current time`;
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
 
     let questionsString = response.text().trim();
     console.log("Raw JSON data:", questionsString);
-    questions = JSON.parse(questionsString); // Assigning value to global questions variable
+    questions = JSON.parse(questionsString);
 
     loadUI();
     loadQue(questions);
