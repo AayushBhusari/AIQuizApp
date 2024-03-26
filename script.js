@@ -35,6 +35,7 @@ const checkAns = (e) => {
   }
   //incorrect option selected
   else {
+    e.target.classList.add("wrong");
     var ansInd;
     let ans = questions[i].answer;
     console.log(`ans from ans ${ans}`);
@@ -77,6 +78,9 @@ const loadNextQue = () => {
   loadQue(questions);
   Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
     elem.classList.remove("correct")
+  );
+  Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
+    elem.classList.remove("wrong")
   );
   /* selectedOption.classList.remove("correct"); */
 };

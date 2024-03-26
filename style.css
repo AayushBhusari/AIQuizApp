@@ -93,13 +93,19 @@ body {
 .options .option button {
   width: 70%;
   height: 50%;
-  background-color: burlywood;
   border-radius: 100px;
+}
+.optBtns {
+  background-color: burlywood;
 }
 
 .correct {
   border: 2px solid green;
-  background-color: #27bd4d;
+  background-color: #6fd087;
+}
+.wrong {
+  border: 2px solid red;
+  background-color: #fb4949;
 }
 
 .next {
