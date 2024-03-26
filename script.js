@@ -38,9 +38,9 @@ const checkAns = (e) => {
     var ansInd;
     let ans = questions[i].answer;
     console.log(questions[i].options);
-    for (let i = 0; i < questions[i].options.length; i++) {
-      if (questions[i].options[i] == ans) {
-        ansInd = i;
+    for (let optNo = 0; optNo < questions[i].options.length; optNo++) {
+      if (questions[i].options[optNo] == ans) {
+        ansInd = optNo;
         if (ansInd == 0) {
           document.getElementById("opt1").classList.add("correct");
         } else if (ansInd == 1) {
@@ -52,6 +52,8 @@ const checkAns = (e) => {
         }
       }
     }
+
+    console.log(ansInd);
   }
 };
 
