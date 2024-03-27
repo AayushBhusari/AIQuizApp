@@ -38,7 +38,3 @@ To run the AI Quiz App locally:
 ## Credits
 
 This project utilizes the Google Generative AI (Gemini) model for content generation.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
