@@ -1,29 +1,29 @@
-@import url("https://fonts.googleapis.com/css2?family=Heebo&family=Montserrat:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&family=Montserrat:wght@500&display=swap");
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Heebo", sans-serif;
 }
 
 body {
   margin: 0;
-  background-color: #1d1d20;
+  background-color: #121212;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100dvh;
-  width: 100dvw;
+  height: 100vh;
+  width: 100vw;
+  font-family: "Heebo", sans-serif;
+  color: #fff;
 }
 
 .modal {
-  /* display: none; */
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: #333;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -34,14 +34,16 @@ body {
   margin: 15px 0;
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   border-radius: 5px;
+  background-color: #444;
+  color: #fff;
 }
 
 .modal button {
   padding: 10px 20px;
   background-color: #007bff;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -56,12 +58,12 @@ body {
   flex-direction: column;
   border-radius: 20px;
   padding: 1.5rem;
-  background-color: aqua;
-  border: 2px solid black;
+  background-color: #333;
+  border: 2px solid #444;
   width: 65%;
   height: 60%;
-
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 10px;
 }
 
 .question {
@@ -71,12 +73,12 @@ body {
   text-align: center;
   margin-top: 5px;
   height: 50%;
-  background-color: bisque;
+  background-color: #444;
 }
 
 .options {
   height: 50%;
-  background-color: wheat;
+  background-color: #444;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   padding: 2rem;
@@ -87,30 +89,40 @@ body {
   align-items: center;
 }
 
-.options .option button {
+.option button {
   width: 70%;
   height: 50%;
   border-radius: 100px;
+  color: #fff;
 }
 .optBtns {
-  background-color: burlywood;
+  background-color: #555;
 }
 
 .correct {
-  border: 2px solid green;
-  background-color: #6fd087;
+  border: 2px solid #2ecc71;
+  background-color: #0f803e;
 }
 .wrong {
-  border: 2px solid red;
-  background-color: #fb4949;
+  border: 2px solid #e74c3c;
+  background-color: #8a1e13;
 }
 
 .next {
   align-self: center;
   justify-self: center;
-  padding: 5px;
+  padding: 10px;
   margin-top: 15px;
   width: 100px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.next:hover {
+  background-color: #0056b3;
 }
 
 .jcs-aic {
@@ -120,6 +132,7 @@ body {
 
 #scoreCard {
   font-size: 2.5rem;
+  margin-top: 20px;
 }
 
 .res {
@@ -132,7 +145,17 @@ body {
 .hidden {
   display: none;
 }
+
 #tryAgain {
   padding: 10px;
   margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#tryAgain:hover {
+  background-color: #0056b3;
 }
