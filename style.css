@@ -94,16 +94,17 @@ body {
   height: 50%;
   border-radius: 100px;
   color: #fff;
+  border: 1px solid black;
 }
 .optBtns {
   background-color: #555;
 }
 
-.correct {
+button.correct {
   border: 2px solid #2ecc71;
   background-color: #0f803e;
 }
-.wrong {
+button.wrong {
   border: 2px solid #e74c3c;
   background-color: #8a1e13;
 }
