@@ -171,13 +171,18 @@ body {
   }
 
   .option button {
-    padding: 10px;
+    padding: 0.8rem;
     height: 100%;
+    width: 90%;
   }
 
   .options {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+  }
+
+  div.quiz {
+    background-color: #333;
   }
 }
