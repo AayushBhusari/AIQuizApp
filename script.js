@@ -36,6 +36,9 @@ const showRes = () => {
 };
 
 const checkAns = (e) => {
+  Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
+    elem.removeEventListener("click", checkAns)
+  );
   selectedOption = e.target;
   //when correct option is selected
   if (selectedOption.innerText == questions[i].answer) {
@@ -70,6 +73,10 @@ const checkAns = (e) => {
 };
 
 const loadQue = () => {
+  Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
+    elem.addEventListener("click", checkAns)
+  );
+  document.getElementById("queNo").innerText = i + 1;
   if (i < questions.length) {
     /* //temporarily commenting and adding show res here
     showRes(); */
@@ -84,6 +91,9 @@ const loadQue = () => {
 };
 
 const loadNextQue = () => {
+  Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
+    elem.addEventListener("click", checkAns)
+  );
   i++;
   loadQue(questions);
   Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
@@ -133,6 +143,3 @@ const getQuestions = async (topic) => {
 
 document.getElementById("enter").addEventListener("click", submitTopic);
 document.querySelector(".next").addEventListener("click", loadNextQue);
-Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
-  elem.addEventListener("click", checkAns)
-);
