@@ -12,8 +12,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100dvw;
   font-family: "Heebo", sans-serif;
   color: #fff;
 }
@@ -158,4 +158,26 @@ body {
 
 #tryAgain:hover {
   background-color: #0056b3;
+}
+
+@media screen and (max-width: 700px) {
+  .modal {
+    width: 90%;
+  }
+  .container {
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+  }
+
+  .option button {
+    padding: 10px;
+    height: 100%;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
 }
