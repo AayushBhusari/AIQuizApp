@@ -23,7 +23,16 @@ const hideModal = () => {
 };
 
 const showRes = () => {
-  alert(score);
+  document.getElementById("res").classList.remove("hidden");
+  /* Array.from(document.getElementsByClassName("quiz")).forEach((elem) =>
+    elem.classList.add("hidden")
+  ); */
+  Array.from(document.getElementsByClassName("quiz")).forEach(
+    (elem) => (elem.style.display = "none")
+  );
+  document.getElementById("container").classList.add("jcs-aic");
+
+  document.getElementById("score").innerText = score;
 };
 
 const checkAns = (e) => {
@@ -61,8 +70,9 @@ const checkAns = (e) => {
 };
 
 const loadQue = () => {
-  // Removed questions parameter
   if (i < questions.length) {
+    /* //temporarily commenting and adding show res here
+    showRes(); */
     document.getElementById("question").innerText = questions[i].question;
     document.getElementById("opt1").innerText = questions[i].options[0];
     document.getElementById("opt2").innerText = questions[i].options[1];
@@ -82,7 +92,6 @@ const loadNextQue = () => {
   Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
     elem.classList.remove("wrong")
   );
-  /* selectedOption.classList.remove("correct"); */
 };
 
 const getQuestions = async (topic) => {
@@ -118,7 +127,7 @@ const getQuestions = async (topic) => {
     loadUI();
     loadQue(questions);
   } catch (error) {
-    console.error(error);
+    alert(error);
   }
 };
 

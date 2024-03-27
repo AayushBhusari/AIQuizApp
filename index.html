@@ -13,10 +13,10 @@
       <button id="enter">Enter</button>
     </div>
     <div id="container" class="hidden">
-      <div class="question">
+      <div class="question quiz">
         <h1 id="question">Question</h1>
       </div>
-      <div class="options">
+      <div class="options quiz">
         <div class="option">
           <button class="optBtns" id="opt1">opt1</button>
         </div>
@@ -30,7 +30,18 @@
           <button class="optBtns" id="opt4">opt4</button>
         </div>
       </div>
-      <button class="next">NEXT</button>
+      <button class="next quiz">NEXT</button>
+      <div id="res" class="res hidden">
+        <h1 id="scoreCard" style="text-align: center">
+          Score : <span id="score"></span>
+        </h1>
+        <input
+          id="tryAgain"
+          type="button"
+          value="Try Again"
+          onClick="window.location.reload(true)"
+        />
+      </div>
     </div>
 
     <script type="importmap">
