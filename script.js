@@ -5,6 +5,14 @@ var score = 0;
 var questions; // Declaring questions globally
 var selectedOption;
 
+const showLoadingScreen = () => {
+  document.getElementById("loading-screen").classList.remove("hidden");
+};
+
+const hideLoadingScreen = () => {
+  document.getElementById("loading-screen").classList.add("hidden");
+};
+
 const loadUI = () => {
   let con = document.getElementById("container");
   con.classList.toggle("hidden");
@@ -24,9 +32,6 @@ const hideModal = () => {
 
 const showRes = () => {
   document.getElementById("res").classList.remove("hidden");
-  /* Array.from(document.getElementsByClassName("quiz")).forEach((elem) =>
-    elem.classList.add("hidden")
-  ); */
   Array.from(document.getElementsByClassName("quiz")).forEach(
     (elem) => (elem.style.display = "none")
   );
@@ -78,8 +83,6 @@ const loadQue = () => {
   );
   document.getElementById("queNo").innerText = i + 1;
   if (i < questions.length) {
-    /* //temporarily commenting and adding show res here
-    showRes(); */
     document.getElementById("question").innerText = questions[i].question;
     document.getElementById("opt1").innerText = questions[i].options[0];
     document.getElementById("opt2").innerText = questions[i].options[1];
@@ -106,6 +109,8 @@ const loadNextQue = () => {
 
 const getQuestions = async (topic) => {
   try {
+    showLoadingScreen(); // Show loading screen before making API call
+
     const genAI = new GoogleGenerativeAI(
       "AIzaSyAL-xcWgAfO_h-z6vx-t7k0Mk1EDHvUZcA"
     );
@@ -130,6 +135,8 @@ const getQuestions = async (topic) => {
     const result = await model.generateContent(prompt);
     const response = await result.response;
 
+    hideLoadingScreen(); // Hide loading screen after receiving API response
+
     let questionsString = response.text().trim();
     console.log("Raw JSON data:", questionsString);
     questions = JSON.parse(questionsString);
@@ -137,7 +144,10 @@ const getQuestions = async (topic) => {
     loadUI();
     loadQue(questions);
   } catch (error) {
-    alert(error);
+    hideLoadingScreen(); // Ensure loading screen is hidden in case of error
+    alert(
+      `It's not my fault. The Gemini AI by Google is causing some issues. Please reload the page.\nAlso, The error says: ${error}`
+    );
   }
 };
 

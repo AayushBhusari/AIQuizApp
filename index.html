@@ -7,11 +7,21 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Loading screen -->
+    <div id="loading-screen" class="loading-screen hidden">
+      <h3>Cooking up the questions...</h3>
+      <br />
+      <div class="loader"></div>
+    </div>
+
+    <!-- Quiz modal -->
     <div class="modal">
       <h2>Enter the topic you want to have the quiz on.....</h2>
       <input type="text" placeholder="Enter the topic" id="topic" />
       <button id="enter">Enter</button>
     </div>
+
+    <!-- Quiz container -->
     <div id="container" class="hidden">
       <div class="question quiz">
         <h1>
