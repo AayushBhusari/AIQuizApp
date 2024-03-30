@@ -1,35 +1,43 @@
+// Importing the necessary module
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+// Declaring global variables
 var i = 0;
 var score = 0;
 var questions; // Declaring questions globally
 var selectedOption;
 
+// Function to show loading screen
 const showLoadingScreen = () => {
   document.getElementById("loading-screen").classList.remove("hidden");
 };
 
+// Function to hide loading screen
 const hideLoadingScreen = () => {
   document.getElementById("loading-screen").classList.add("hidden");
 };
 
+// Function to load UI elements
 const loadUI = () => {
   let con = document.getElementById("container");
   con.classList.toggle("hidden");
   con.classList.add("container");
 };
 
+// Function to handle topic submission
 const submitTopic = () => {
   var topic = document.getElementById("topic").value;
   getQuestions(topic);
   hideModal();
 };
 
+// Function to hide modal
 const hideModal = () => {
   var modal = document.querySelector(".modal");
   modal.style.display = "none";
 };
 
+// Function to show result
 const showRes = () => {
   document.getElementById("res").classList.remove("hidden");
   Array.from(document.getElementsByClassName("quiz")).forEach(
@@ -40,44 +48,50 @@ const showRes = () => {
   document.getElementById("score").innerText = score;
 };
 
+// Function to highlight the correct answer
+const highlightAns = () => {
+  var ansInd;
+  let ans = questions[i].answer;
+  for (let optNo = 0; optNo < questions[i].options.length; optNo++) {
+    if (questions[i].options[optNo] == ans) {
+      console.log("Answer from search" + questions[i].options[optNo]);
+      ansInd = optNo;
+      if (ansInd == 0) {
+        document.getElementById("opt1").classList.add("correct");
+      } else if (ansInd == 1) {
+        document.getElementById("opt2").classList.add("correct");
+      } else if (ansInd == 2) {
+        document.getElementById("opt3").classList.add("correct");
+      } else if (ansInd == 3) {
+        document.getElementById("opt4").classList.add("correct");
+      }
+    }
+  }
+};
+
+// Function to check the selected answer
 const checkAns = (e) => {
+  // Remove event listeners from options
   Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
     elem.removeEventListener("click", checkAns)
   );
   selectedOption = e.target;
-  //when correct option is selected
+  // When correct option is selected
   if (selectedOption.innerText == questions[i].answer) {
+    highlightAns();
     score += 1;
-    selectedOption.classList.add("correct");
   }
-  //incorrect option selected
+  // When incorrect option selected
   else {
     e.target.classList.add("wrong");
-    var ansInd;
-    let ans = questions[i].answer;
-    console.log(`ans from ans ${ans}`);
-    console.log(questions[i].options);
-    for (let optNo = 0; optNo < questions[i].options.length; optNo++) {
-      if (questions[i].options[optNo] == ans) {
-        console.log("Answer from search" + questions[i].options[optNo]);
-        ansInd = optNo;
-        if (ansInd == 0) {
-          document.getElementById("opt1").classList.add("correct");
-        } else if (ansInd == 1) {
-          document.getElementById("opt2").classList.add("correct");
-        } else if (ansInd == 2) {
-          document.getElementById("opt3").classList.add("correct");
-        } else if (ansInd == 3) {
-          document.getElementById("opt4").classList.add("correct");
-        }
-      }
-    }
-
-    console.log(`ansInd : ${ansInd}`);
+    highlightAns();
   }
+  document.getElementById("skipNextBtn").innerText = "Next";
 };
 
+// Function to load the current question
 const loadQue = () => {
+  document.getElementById("skipNextBtn").innerText = "Skip";
   Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
     elem.addEventListener("click", checkAns)
   );
@@ -93,6 +107,7 @@ const loadQue = () => {
   }
 };
 
+// Function to load the next question
 const loadNextQue = () => {
   Array.from(document.querySelectorAll(".optBtns")).forEach((elem) =>
     elem.addEventListener("click", checkAns)
@@ -107,31 +122,35 @@ const loadNextQue = () => {
   );
 };
 
+// Function to retrieve questions from API
 const getQuestions = async (topic) => {
   try {
     showLoadingScreen(); // Show loading screen before making API call
 
+    // Create GoogleGenerativeAI instance
     const genAI = new GoogleGenerativeAI(
       "AIzaSyAL-xcWgAfO_h-z6vx-t7k0Mk1EDHvUZcA"
     );
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
+    // Set prompt for generating questions
     const prompt = `Generate 20 questions on the topic ${topic} for preparation of NDA exam with medium difficulty in the format of objects with the following structure:
+  
+      [
+        {
+          "question": "Question 1 here",
+          "options": ["option 1", "option 2", "option 3", "option 4"],
+          "answer": "answer here"
+        },
+        {
+          "question": "Question 2 here",
+          "options": ["option 1", "option 2", "option 3", "option 4"],
+          "answer": "answer here"
+        },
+        // Add more data here
+      ].Make sure there are no syntax errors in the response, no missing colons, semicolons, brackets, square-brackets or anything.When mentioning title of anything in the question, use single quotation mark (') instead of double ones("). Options of the questions should be inside an array named options.In case of current affairs, make sure all the questions are up to date with current time`;
 
-    [
-      {
-        "question": "Question 1 here",
-        "options": ["option 1", "option 2", "option 3", "option 4"],
-        "answer": "answer here"
-      },
-      {
-        "question": "Question 2 here",
-        "options": ["option 1", "option 2", "option 3", "option 4"],
-        "answer": "answer here"
-      },
-      // Add more data here
-    ].Make sure there are no syntax errors in the response, no missing colons, semicolons, brackets, square-brackets or anything.When mentioning title of anything in the question, use single quotation mark (') instead of double ones("). Options of the questions should be inside an array named options.In case of current affairs, make sure all the questions are up to date with current time`;
-
+    // Generate content using prompt
     const result = await model.generateContent(prompt);
     const response = await result.response;
 
@@ -151,5 +170,21 @@ const getQuestions = async (topic) => {
   }
 };
 
+// Function to handle skipping a question
+const skipQue = () => {
+  highlightAns();
+  document.querySelector("#skipNextBtn").innerText = "Next";
+};
+
+// Function to handle skipping or loading next question
+const skipNextQue = () => {
+  if (document.querySelector("#skipNextBtn").innerText == "Skip") {
+    skipQue();
+  } else {
+    loadNextQue();
+  }
+};
+
+// Event listeners for topic submission and skip/next button
 document.getElementById("enter").addEventListener("click", submitTopic);
-document.querySelector(".next").addEventListener("click", loadNextQue);
+document.querySelector("#skipNextBtn").addEventListener("click", skipNextQue);
