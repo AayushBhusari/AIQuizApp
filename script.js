@@ -129,7 +129,7 @@ const getQuestions = async (topic) => {
 
     // Create GoogleGenerativeAI instance
     const genAI = new GoogleGenerativeAI(
-      "AIzaSyAL-xcWgAfO_h-z6vx-t7k0Mk1EDHvUZcA"
+      "67"
     );
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
